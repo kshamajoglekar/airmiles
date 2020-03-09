@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.MessagesRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class WallFeatureService {
@@ -22,5 +24,16 @@ public class WallFeatureService {
         List<String> mesages = messagesRepository.getUserMessages().get(StringUtils.lowerCase(user));
         String messagesJson = mapper.writeValueAsString(mesages);
         return messagesJson;
+    }
+
+    public void addMessage(String user,String msg) throws JsonProcessingException {
+
+        user=StringUtils.lowerCase(user);
+        Map<String,List<String>> userMessages =messagesRepository.getUserMessages();
+        List<String> messages = new ArrayList<>(userMessages.get(user));
+        messages.add(msg);
+        userMessages.put(user,messages);
+        messagesRepository.setUserMessages(userMessages);
+
     }
 }

@@ -22,7 +22,8 @@ export default class Wall extends Component {
           weather:"15Degrees Pleasent"
         }
       ],
-      masseges: ['jio','bgjhg']
+      masseges: [],
+      newMessage: ''
     }
    
   }
@@ -30,22 +31,29 @@ export default class Wall extends Component {
   componentDidMount(){
     this.setState({masseges: this.props.messages})
   }
-  handleAddPerson = () =>{
-    const {firstName, lastName } = this.state
-    this.props.addPerson(firstName, lastName)
-    this.setState( {firstName, lastName} )
-  }
 
-  handleChange = (event) => {
+  updateState=(event) =>{
     if (this.state[event.target.name] !== undefined) {
       this.setState( {[event.target.name]: event.target.value})
     }
+
   }
 
   render () {
     return (
       <div className="Login">
+
         <h3>Wall</h3>
+
+        Post message: 
+          <input
+            type="text" name="newMessage" 
+            value={this.state.newMessage} onChange={this.updateState} />
+
+          <button className="add" onClick={()=>this.props.handlePostMessage(this.state.newMessage)}>Post</button>
+
+        <br /><br />
+        <h5> Here are all your messeges: </h5>
         <h6>
           <table >
           {
