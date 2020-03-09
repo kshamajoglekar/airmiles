@@ -29,8 +29,14 @@ public class WallFeatureService {
     public void addMessage(String user,String msg) throws JsonProcessingException {
 
         user=StringUtils.lowerCase(user);
+        List<String> messages=new ArrayList<>();;
+
         Map<String,List<String>> userMessages =messagesRepository.getUserMessages();
-        List<String> messages = new ArrayList<>(userMessages.get(user));
+
+        if (userMessages.containsKey(user)) {
+            messages.addAll(userMessages.get(user));
+        }
+
         messages.add(msg);
         userMessages.put(user,messages);
         messagesRepository.setUserMessages(userMessages);

@@ -5,73 +5,75 @@ export default class Wall extends Component {
 
   constructor(props) {
     super(props)
-  
+
     this.state = {
-      user:'',
-      city:[
+      user: '',
+      city: [
         {
-          name:"toronto",
-          weather:"10Degrees Warmer"
+          name: "toronto",
+          weather: "10Degrees Warmer"
         },
         {
-          name:"vancouver",
-          weather:"5Degrees Warm"
+          name: "vancouver",
+          weather: "5Degrees Warm"
         },
         {
-          name:"New York",
-          weather:"15Degrees Pleasent"
+          name: "New York",
+          weather: "15Degrees Pleasent"
         }
       ],
-      masseges: [],
+      messages: [],
       newMessage: ''
     }
-   
+
   }
 
-  componentDidMount(){
-    this.setState({masseges: this.props.messages})
+  componentDidMount() {
+    this.setState({ messages: this.props.messages })
   }
 
-  updateState=(event) =>{
+  updateState = (event) => {
     if (this.state[event.target.name] !== undefined) {
-      this.setState( {[event.target.name]: event.target.value})
+      this.setState({ [event.target.name]: event.target.value })
     }
 
   }
 
-  render () {
-    return (
-      <div className="Login">
+  render() {
+ 
+      return (
+        <div className="Login">
 
-        <h3>Wall</h3>
+          <h3>Wall</h3>
 
-        Post message: 
+          Post message:
           <input
-            type="text" name="newMessage" 
+            type="text" name="newMessage"
             value={this.state.newMessage} onChange={this.updateState} />
 
-          <button className="add" onClick={()=>this.props.handlePostMessage(this.state.newMessage)}>Post</button>
+          <button className="add" onClick={() => this.props.handlePostMessage(this.state.newMessage)}>Post</button>
 
-        <br /><br />
-        <h5> Here are all your messeges: </h5>
-        <h6>
-          <table >
-          {
-            this.props.messages.map((message) => {
-              return (
-                <tr>
-                <td id={message}>
-                  {message}
-                </td>
-                </tr>
-              )
-            })
-          }         
-        
-          </table>
-        </h6>        
-      </div>
-    )
+          <br /><br />
+          <h6> Messeges: </h6>
+          <h6>
+            <table >
+              {               
+                this.props.messages.map((message) => {
+                  return (
+                    <tr>
+                      <td id={message}>
+                        {message}
+                      </td>
+                    </tr>
+                  )
+                })
+              }
+ 
+
+            </table>
+          </h6>
+        </div>
+      )
   }
 
 }

@@ -28,8 +28,13 @@ export default class App extends Component {
 
     fetch(`http://localhost:8080/user/${name}/messages`)
       .then(result => result.json())
-      .then((result) =>  {return this.setState({ messages: result })}
-      )
+      .then((result) =>  {
+        if(result ==null){
+        return this.setState({ messages: ["You have no new mesg"] })
+        }else{
+        return this.setState({ messages: result })
+      }
+    })
 
     // this.state.messages.map((message) => {
     //   console.log("result=" + message)
@@ -44,7 +49,13 @@ export default class App extends Component {
       body: newMessage
     })
       .then(result => result.json())
-      .then((result) =>  {return this.setState({ messages: result })}
+      .then((result) =>  {
+        if(result ==null){
+          return this.setState({ messages: ["You have no new mesg"] })
+          }else{
+          return this.setState({ messages: result })
+        }
+      }
       )
 
     // this.state.messages.map((message) => {
