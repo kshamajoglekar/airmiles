@@ -40,24 +40,24 @@ export default class Wall extends Component {
   }
 
   render() {
- 
-      return (
-        <div className="Login">
 
-          <h3>Wall</h3>
+    return (
+      <div>
+        <div className="header"> Wall   </div>
 
-          Post message:
-          <input
-            type="text" name="newMessage"
-            value={this.state.newMessage} onChange={this.updateState} />
-
-          <button className="add" onClick={() => this.props.handlePostMessage(this.state.newMessage)}>Post</button>
-
+        <div className="wall">
+          <div className="post-share">
+            What's your Message
+            <input
+              type="text" name="newMessage"
+              value={this.state.newMessage} onChange={this.updateState} />
+            <button className="add" onClick={() => this.props.handlePostMessage(this.state.newMessage)}>Post</button>
+          </div>
           <br /><br />
           <h6> Messeges: </h6>
           <h6>
             <table >
-              {               
+              {
                 this.props.messages.map((message) => {
                   return (
                     <tr>
@@ -68,12 +68,14 @@ export default class Wall extends Component {
                   )
                 })
               }
- 
+
 
             </table>
           </h6>
         </div>
-      )
+      </div>
+
+    )
   }
 
 }

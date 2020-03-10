@@ -22,10 +22,11 @@ export default class Login extends Component {
 
   render() {
     return (
-    <div className="Login">
+    <div>
+    <div className="header"> Login </div>
 
-        <p>Login</p>
-       
+        
+       <div className="login-body">
           Name: 
           <input
             type="text" name="name" 
@@ -36,6 +37,7 @@ export default class Login extends Component {
 
           <button className="add" onClick={()=>this.props.handleLogin(this.state.name,this.state.city)}>Login</button>
         
+      </div>
       </div>
     )  
   }

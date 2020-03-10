@@ -33,10 +33,44 @@
   text-align: left
 }
 
-.Login{
+.header{
   font-size: 1.5em;
-  background-color: lightpink;
+  background-color: midnightblue;
   height: 50px;
   padding: 20px;
-  color: midnightblue;
+  color: whitesmoke;
+}
+
+.login-body{
+  margin-top: 5vh;
+  margin-left: 30vw;
+  margin-right: 30vw;
+  font-size: .5cm;
+  background-color: white;
+  
+  padding: 100px;
+  border-style: ridge;
+  color: black;
+}
+
+.wall{
+  font-size: .5cm;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-top: 5vh;
+  padding: 50px;
+  border: chocolate;
+  background-color: aliceblue;
+  text-align: left;
+  color: gray;
+  padding: 10px;
+  
+}
+
+.post-share{
+  padding: 10px;
+  border-style: ridge;
+}
+.spacing{
+  white-space: 2vw;
 }
