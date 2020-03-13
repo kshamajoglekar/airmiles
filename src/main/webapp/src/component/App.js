@@ -12,7 +12,11 @@ export default class App extends Component {
     this.state = {
       user: '',
       city: '',
-      messages: [],
+      messages: [{message: String,
+        responses:[],
+        createdDateTime: String
+      }],
+      user: {},
       view: 'Login'
     };
   }
@@ -29,16 +33,12 @@ export default class App extends Component {
     fetch(`http://localhost:8080/user/${name}/messages`)
       .then(result => result.json())
       .then((result) =>  {
-        if(result ==null){
-        return this.setState({ messages: ["You have no new mesg"] })
-        }else{
+        if(result && result.length  > 0){      
         return this.setState({ messages: result })
+        }else{
+          return this.setState({ messages: [{message:"You have no new mesg"}]})
       }
     })
-
-    // this.state.messages.map((message) => {
-    //   console.log("result=" + message)
-    // })
     this.setState({ view: 'Wall' })
   }
 
@@ -50,19 +50,15 @@ export default class App extends Component {
     })
       .then(result => result.json())
       .then((result) =>  {
-        if(result ==null){
-          return this.setState({ messages: ["You have no new mesg"] })
+        if(result && result.length  > 0){
+          return this.setState({ messages: result })     
           }else{
-          return this.setState({ messages: result })
+            return this.setState({ messages: [{message:"You have no new mesg"}]})
         }
-      }
-      )
-
-    // this.state.messages.map((message) => {
-    //   console.log("result=" + message)
-    // })
-    this.setState({ view: 'Wall' })
-  }
+      })
+      this.setState({ view: 'Wall' })
+    }
+ 
 
   getView = () => {
     switch (this.state.view) {

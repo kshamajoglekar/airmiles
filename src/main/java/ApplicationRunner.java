@@ -10,10 +10,10 @@ import org.springframework.context.annotation.ComponentScan;
         "common",
         "controller",
         "service",
-        "repository",
+        "data",
         "model",
 })
-@EntityScan("repository")
+@EntityScan("data")
 @EnableAutoConfiguration
 public class ApplicationRunner {
 

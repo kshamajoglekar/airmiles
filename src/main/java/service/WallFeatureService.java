@@ -1,45 +1,38 @@
 package service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.StringUtils;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import data.MessagesData;
+import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.MessagesRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
 
 @Service
 public class WallFeatureService {
 
     @Autowired
-    MessagesRepository messagesRepository;
+    MessagesData messagesData;
 
-    private ObjectMapper mapper = new ObjectMapper();
+    private ObjectMapper mapper;
 
-    public String getMasseges(String user) throws JsonProcessingException {
+    public WallFeatureService() {
+        mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+    }
 
-        List<String> mesages = messagesRepository.getUserMessages().get(StringUtils.lowerCase(user));
-        String messagesJson = mapper.writeValueAsString(mesages);
+    public String getUserMessagesData(String userName) throws IOException {
+        User user = messagesData.getUserData(userName);
+        String messagesJson = mapper.writeValueAsString(user.getMessages());
+
         return messagesJson;
     }
 
-    public void addMessage(String user,String msg) throws JsonProcessingException {
-
-        user=StringUtils.lowerCase(user);
-        List<String> messages=new ArrayList<>();;
-
-        Map<String,List<String>> userMessages =messagesRepository.getUserMessages();
-
-        if (userMessages.containsKey(user)) {
-            messages.addAll(userMessages.get(user));
-        }
-
-        messages.add(msg);
-        userMessages.put(user,messages);
-        messagesRepository.setUserMessages(userMessages);
-
+    public void addMessage(String user, String msg) throws IOException {
+        messagesData.addMessage(user, msg);
     }
+
 }

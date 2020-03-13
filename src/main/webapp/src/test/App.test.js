@@ -1,9 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 
 import App from '../component/App'
-import Home from '../Home'
+
 
 describe("Application Test Suite", () => { 
 
@@ -12,21 +11,11 @@ describe("Application Test Suite", () => {
     expect(wrapper.exists("render"))
   })
 
-  it("Shallow test for Add Person button", ()=> {
+  it("Test if Login component exist", ()=> {
     const wrapper = shallow(<App />)
-    const addButton = wrapper.find(Home)
+    const state=wrapper.state()
 
-    expect(addButton).toHaveLength(1)
-
-  })
-
-  it("Test for Add Person button clicked", ()=> {
-    const wrapper = shallow(<App />)
-    wrapper.instance().addPerson()
-
-    const addButton = wrapper.find(Home)
-    expect(addButton).toHaveLength(1)
-
+    expect(state.view).toBe('Login')
 
   })
 

@@ -61,15 +61,13 @@ export default class Wall extends Component {
                 this.props.messages.map((message) => {
                   return (
                     <tr>
-                      <td id={message}>
-                        {message}
+                      <td id={message.message}>
+                        {message.message}
                       </td>
                     </tr>
                   )
                 })
               }
-
-
             </table>
           </h6>
         </div>
